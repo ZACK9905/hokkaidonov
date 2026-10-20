@@ -191,4 +191,399 @@ const defaultData = {
                 date: "11月11日 (周三)",
                 title: "白色恋人公园 & 小樽运河浪漫日归",
                 highlight: "早晨参观巧克力城堡，下午去沿海小镇小樽，看运河夜景与复古街景。",
-                transit: "🚇/🚆 交通：
+                transit: "🚇/🚆 交通：地下铁东西线 + JR 函馆本线（刷 IC 卡）",
+                items: [
+                    { time: "09:30 - 11:30", spot: "白色恋人公园 (Shiroi Koibito)", action: "参观欧式童话城堡与巧克力工厂，品尝限定软冰淇淋。", transit: "地下铁东西线至“宫之泽站”，步行 7 分钟" },
+                    { time: "12:00 - 12:45", spot: "移动前往小樽", action: "搭乘 JR 列车前往小樽（推荐列车靠右侧座位，观赏海景）。", transit: "地下铁至琴似站换乘 JR 函馆本线" },
+                    { time: "13:00 - 14:30", spot: "午餐：小樽三角市场", action: "小樽站旁即达，在武田鲜鱼店或泷波食堂享用鲜切海鲜。", transit: "出小樽站步行 1 分钟" },
+                    { time: "14:30 - 17:00", spot: "堺町通商店街 散策", action: "逛北一硝子玻璃工坊、小樽八音盒堂，在 LeTAO 本店吃下午茶。", transit: "沿主干道徒步慢游" },
+                    { time: "17:00 - 18:30", spot: "小樽运河夜景", action: "拍下运河浪漫夜景，随后搭乘 JR 快速列车返回札幌。", transit: "从运河步行 10 分钟至小樽站" }
+                ]
+            },
+            {
+                tabLabel: "11/12 旭川/备选",
+                date: "11月12日 (周四)",
+                title: "旭川动物园一日游 (或 札幌近郊闲适游)",
+                highlight: "看北极熊与海豹；若不想长途坐车，也可换成定山溪温泉/神宫散步。",
+                transit: "🚆/🚌 交通：JR 特急列车（札幌$\leftrightarrow$旭川，需划位）+ 旭川市营巴士",
+                items: [
+                    { time: "08:30 - 10:00", spot: "札幌 $\rightarrow$ 旭川", action: "搭乘 JR 特急 Lilac 或 Kamui 号直达旭川站。", transit: "JR 特急约 1 小时 25 分钟" },
+                    { time: "10:10 - 10:50", spot: "旭川站 $\rightarrow$ 旭山动物园", action: "在站前 6 号巴士站搭乘专线巴士直达动物园。", transit: "市营巴士约 40 分钟" },
+                    { time: "11:00 - 14:30", spot: "旭山动物园 参观", action: "充裕时间观看北极熊入水、海豹馆水槽及企鹅馆。", transit: "园内徒步" },
+                    { time: "15:00 - 17:00", spot: "旭川市区 & 酱油拉面", action: "返回旭川站周边品尝正宗酱油拉面（青叶或梅光轩），随后搭 JR 返回札幌。", transit: "巴士 + JR 特急" }
+                ]
+            },
+            {
+                tabLabel: "11/13 备战",
+                date: "11月13日 (周五)",
+                title: "札幌深度采买 & 预订温泉车票",
+                highlight: "不安排赶行程景点，全天轻松购物、吃烤肉，并划好明天去登别的车票。",
+                transit: "🚇 交通：地下铁 + 步行",
+                items: [
+                    { time: "10:00 - 12:30", spot: "北海道神宫参拜", action: "前往圆山公园与北海道神宫参拜散步，购买特色御守。", transit: "地下铁东西线至“圆山公园站”" },
+                    { time: "13:00 - 15:00", spot: "午餐：成吉思汗烤羊肉", action: "品尝北海道烤羊肉（Daruma 达摩或松尾成吉思汗）。", transit: "返回市区" },
+                    { time: "15:30 - 17:30", spot: "札幌站购物 & 划温泉车票", action: "前往 JR 札幌站绿色窗口或售票机，划好明日前往登别的指定席车票，顺便购物。", transit: "JR 札幌站内" },
+                    { time: "18:00 - 20:00", spot: "JR Tower T38 展望台", action: "登上 T38 展望台，360 度俯瞰札幌夜景。", transit: "札幌站直通" }
+                ]
+            },
+            {
+                tabLabel: "11/14 登别温泉",
+                date: "11月14日 (周六)",
+                title: "前往登别温泉 & 地狱谷巡游",
+                highlight: "前往温泉乡，体验硫磺温泉与日式会席料理。",
+                transit: "🚆/🚌 交通：JR 特急列车（全车指定席）+ 道南巴士",
+                items: [
+                    { time: "10:30 - 11:45", spot: "札幌站 $\rightarrow$ JR 登别站", action: "搭乘 JR 特急“北斗号”或“铃兰号”前往登别。", transit: "JR 特急约 1 小时 10 分钟" },
+                    { time: "12:00 - 12:20", spot: "登别站 $\rightarrow$ 温泉街", action: "换乘道南巴士直达登别温泉街。", transit: "道南巴士约 15 分钟" },
+                    { time: "12:30 - 14:30", spot: "午餐 & 寄放行李", action: "享用地道拉面，前往温泉酒店寄放行李。", transit: "温泉街步行" },
+                    { time: "14:30 - 17:00", spot: "登别地狱谷 & 大汤沼散步", action: "漫步地狱谷奇观，前往大汤沼体验天然足汤。", transit: "木栈道徒步" },
+                    { time: "18:00 +", spot: "温泉酒店入住 & 会席料理", action: "Check-in 入住，换上浴衣享用日式晚餐与温泉。", transit: "酒店内" }
+                ]
+            },
+            {
+                tabLabel: "11/15 温泉度假",
+                date: "11月15日 (周日)",
+                title: "登别温泉慢活一日",
+                highlight: "零赶路，极致放松，泡汤、散步、品尝美食。",
+                transit: "🚶 交通：全天温泉街徒步漫游",
+                items: [
+                    { time: "08:30 - 10:30", spot: "晨汤 & 丰盛日式早餐", action: "清晨泡露天晨汤，享用酒店日式早餐。", transit: "酒店内" },
+                    { time: "11:00 - 14:00", spot: "登别熊牧场 / 温泉街漫逛", action: "搭缆车前往熊牧场，或在温泉街选购限定伴手礼。", transit: "步行" },
+                    { time: "14:30 - 17:30", spot: "下午茶与二次泡汤", action: "在温泉街甜点店休息，下午继续享受不同温泉池。", transit: "酒店内" },
+                    { time: "18:00 +", spot: "晚餐与夜间表演", action: "享用酒店晚餐，晚间看阎魔堂机关人偶表演。", transit: "步行" }
+                ]
+            },
+            {
+                tabLabel: "11/16 返回机场周边",
+                date: "11月16日 (周一)",
+                title: "返回札幌/千岁站 & 备战回程",
+                highlight: "提前一天回到靠近机场地区，买伴手礼打包行李，消除赶飞机风险。",
+                transit: "🚆 交通：道南巴士 + JR 特急列车",
+                items: [
+                    { time: "10:30 - 12:00", spot: "退房 $\rightarrow$ 返回札幌或千岁站", action: "退房后搭巴士至 JR 登别站，换乘 JR 特急返回札幌站或千岁站附近酒店。", transit: "JR 特急约 1 小时 10 分钟" },
+                    { time: "12:30 - 15:00", spot: "午餐 & 购物冲刺", action: "享用午餐，采买伴手礼（白色恋人、Royce 等）。", transit: "商场步行" },
+                    { time: "16:00 - 18:00", spot: "酒店休息 & 打包行李", action: "办理入住，将购物战利品整理打包。", transit: "入住酒店" },
+                    { time: "18:30 - 20:30", spot: "北海道告别晚餐", action: "品尝北海道特色晚餐（成吉思汗烤肉或汤咖喱）。", transit: "自由选择" }
+                ]
+            },
+            {
+                tabLabel: "11/17 离境返程",
+                date: "11月17日 (周二)",
+                title: "新千岁 ✈️ 浦东 ✈️ 吉隆坡返程",
+                highlight: "前往机场国内线商场极速采买，搭乘航班顺利返回 KUL。",
+                transit: "🚆 交通：JR 快速 Airport 直达机场\n✈️ 航班：13:30 CTS -> 17:10 PVG | 00:10 PVG -> 05:40 KUL",
+                items: [
+                    { time: "09:00 - 09:40", spot: "前往新千岁机场 (CTS)", action: "搭乘 JR 快速 Airport 直达新千岁机场。", transit: "JR 快速列车 37-40 分钟" },
+                    { time: "10:00 - 11:30", spot: "机场托运 & 国内线商场采买", action: "办理托运后，逛哆啦A梦乐园、Royce 巧克力世界与甜点街。", transit: "航站楼内" },
+                    { time: "11:30 - 12:30", spot: "午餐 & 过安检登机", action: "吃最后一碗热拉面，通过安检准备登机。", transit: "国际线航站楼" },
+                    { time: "13:30 - 17:10", spot: "新千岁 (CTS) ✈️ 上海浦东 (PVG)", action: "搭乘航班前往上海浦东转机。", transit: "航班 4 小时 40 分" },
+                    { time: "17:10 - 23:30", spot: "上海浦东 (PVG) 中转休整", action: "提行李过中转，在机场晚餐与休整。", transit: "机场中转" },
+                    { time: "00:10 - 05:40", spot: "上海浦东 (PVG) ✈️ 吉隆坡 (KUL)", action: "11月18日凌晨 00:10 起飞，清晨 05:40 顺利安抵吉隆坡！", transit: "航班 5 小时 30 分" }
+                ]
+            }
+        ]
+    },
+    en: {
+        title: "✈️ 2026 Hokkaido Trip",
+        overviewTab: "📋 Overview",
+        days: [
+            {
+                tabLabel: "11/9 Flight & Arrival",
+                date: "Nov 9 (Mon)",
+                title: "KUL ✈️ PVG ✈️ CTS Arrival & Rest",
+                highlight: "Overnight flight arrival. Primary goal is rest & warm ramen at Tanukikoji.",
+                transit: "✈️ Flights: 00:15 KUL -> 05:40 PVG | 08:20 PVG -> 12:30 CTS\n🚆 Transit: JR Rapid Airport (37 mins)",
+                items: [
+                    { time: "00:15 - 05:40", spot: "KUL ✈️ Shanghai (PVG)", action: "Overnight flight.", transit: "5 hrs 25 mins flight" },
+                    { time: "05:40 - 08:20", spot: "Shanghai PVG Transit", action: "Clear transit security and board flight to CTS.", transit: "Transit in PVG" },
+                    { time: "08:20 - 12:30", spot: "PVG ✈️ New Chitose (CTS)", action: "Land at CTS at 12:30, clear customs & pick up luggage.", transit: "3 hrs 10 mins flight" },
+                    { time: "13:30 - 14:30", spot: "CTS Airport to Sapporo Station", action: "Head to JR station, board JR Rapid Airport to Sapporo.", transit: "37-40 mins JR train" },
+                    { time: "15:00 - 17:30", spot: "Hotel Check-in & Rest", action: "Check in hotel and take a nap to recover energy.", transit: "Walk / Subway" },
+                    { time: "18:00 - 20:30", spot: "Tanukikoji Walk & Miso Ramen", action: "Evening stroll at Tanukikoji and enjoy Sapporo Miso Ramen.", transit: "Walk" }
+                ]
+            },
+            {
+                tabLabel: "11/10 Sapporo",
+                date: "Nov 10 (Tue)",
+                title: "Sapporo City & Gourmet Day",
+                highlight: "Smooth route: Seafood brunch -> Campus walk -> Shopping -> Soup Curry.",
+                transit: "🚇 Transit: Sapporo Subway Namboku Line + Walk (IC Card)",
+                items: [
+                    { time: "09:30 - 11:30", spot: "Nijo Market Brunch", action: "Enjoy fresh seafood bowl at Nijo Market.", transit: "Walk or Subway to Odori" },
+                    { time: "12:00 - 14:30", spot: "Hokkaido University Campus", action: "Stroll through white birch woods and historic buildings.", transit: "Subway Namboku Line" },
+                    { time: "15:00 - 17:30", spot: "Odori Park & Tanukikoji", action: "Pass by TV Tower, shop at Tanukikoji.", transit: "Subway" },
+                    { time: "18:00 - 20:30", spot: "Dinner: Soup Curry", action: "Enjoy Soup Curry at Suage+ or GARAKU.", transit: "Walk" }
+                ]
+            },
+            {
+                tabLabel: "11/11 Otaru",
+                date: "Nov 11 (Wed)",
+                title: "Shiroi Koibito Park & Otaru Canal",
+                highlight: "Chocolate factory in morning, Otaru seaside town & canal night view in afternoon.",
+                transit: "🚇/🚆 Transit: Subway Tozai Line + JR Hakodate Line (IC Card)",
+                items: [
+                    { time: "09:30 - 11:30", spot: "Shiroi Koibito Park", action: "Visit chocolate factory castle.", transit: "Subway to Miyanosawa" },
+                    { time: "12:00 - 12:45", spot: "Train to Otaru", action: "JR train to Otaru (sit right side for sea views).", transit: "JR train" },
+                    { time: "13:00 - 14:30", spot: "Lunch at Sankaku Market", action: "Fresh seafood lunch right beside station.", transit: "1 min walk" },
+                    { time: "14:30 - 17:00", spot: "Sakaimachi Street Walk", action: "Browse glasscrafts, music box museum, LeTAO cake.", transit: "Stroll" },
+                    { time: "17:00 - 18:30", spot: "Otaru Canal Night View", action: "Enjoy canal gas lamps, JR train back to Sapporo.", transit: "35 mins JR train" }
+                ]
+            },
+            {
+                tabLabel: "11/12 Asahikawa",
+                date: "Nov 12 (Thu)",
+                title: "Asahiyama Zoo Day Trip (or Local Relax)",
+                highlight: "Polar bears & seals at zoo; or Jozankei Onsen / Shrine walk.",
+                transit: "🚆/🚌 Transit: JR Limited Express + Asahikawa City Bus",
+                items: [
+                    { time: "08:30 - 10:00", spot: "Sapporo to Asahikawa", action: "JR Limited Express to Asahikawa Station.", transit: "1 hr 25 mins JR" },
+                    { time: "10:10 - 10:50", spot: "Station to Zoo", action: "City bus directly to Asahiyama Zoo.", transit: "40 mins bus" },
+                    { time: "11:00 - 14:30", spot: "Asahiyama Zoo Tour", action: "Ample time for polar bears, seals, penguins.", transit: "Walk inside zoo" },
+                    { time: "15:00 - 17:00", spot: "Asahikawa Soy Ramen", action: "Enjoy famous Soy Sauce Ramen before heading back.", transit: "Bus + JR train" }
+                ]
+            },
+            {
+                tabLabel: "11/13 Prep Day",
+                date: "Nov 13 (Fri)",
+                title: "Sapporo Shrine, BBQ & Train Reservation",
+                highlight: "Shopping day. Reserve tomorrow's train ticket to Noboribetsu.",
+                transit: "🚇 Transit: Subway + Walk",
+                items: [
+                    { time: "10:00 - 12:30", spot: "Hokkaido Shrine", action: "Stroll in Maruyama Park and Hokkaido Shrine.", transit: "Subway Tozai Line" },
+                    { time: "13:00 - 15:00", spot: "Genghis Khan BBQ Lunch", action: "Taste grilled mutton at Daruma or Matsuo.", transit: "Back to city center" },
+                    { time: "15:30 - 17:30", spot: "Sapporo Station & Ticket Prep", action: "Reserve tomorrow's JR seats to Noboribetsu. Shop around station.", transit: "JR Sapporo Station" },
+                    { time: "18:00 - 20:00", spot: "JR Tower T38 Night View", action: "Enjoy 360-degree city view from T38 deck.", transit: "Directly connected to station" }
+                ]
+            },
+            {
+                tabLabel: "11/14 Noboribetsu",
+                date: "Nov 14 (Sat)",
+                title: "Noboribetsu Onsen & Jigokudani Valley",
+                highlight: "Hot Spring village, outdoor onsen and Kaiseki dinner.",
+                transit: "🚆/🚌 Transit: JR Limited Express + Donan Bus",
+                items: [
+                    { time: "10:30 - 11:45", spot: "Sapporo to Noboribetsu", action: "Take JR Limited Express Hokuto / Suzuran to Noboribetsu.", transit: "1 hr 10 mins train" },
+                    { time: "12:00 - 12:20", spot: "Station to Onsen Village", action: "Donan Bus directly to Onsen street.", transit: "15 mins bus" },
+                    { time: "12:30 - 14:30", spot: "Lunch & Drop Luggage", action: "Have Jigoku Ramen and drop luggage at Ryokan.", transit: "Walk" },
+                    { time: "14:30 - 17:00", spot: "Jigokudani & Footbath", action: "Walk Hell Valley, enjoy natural footbath.", transit: "Walking paths" },
+                    { time: "18:00 +", spot: "Ryokan Stay & Kaiseki Dinner", action: "Check-in, wear Yukata, enjoy Japanese dinner & hot springs.", transit: "Ryokan" }
+                ]
+            },
+            {
+                tabLabel: "11/15 Relax Onsen",
+                date: "Nov 15 (Sun)",
+                title: "Noboribetsu Onsen Full Relaxing Day",
+                highlight: "Zero rush day: Hot springs, village stroll, and delicious food.",
+                transit: "🚶 Transit: Walking around Onsen village",
+                items: [
+                    { time: "08:30 - 10:30", spot: "Morning Bath & Breakfast", action: "Outdoor morning bath and traditional Japanese breakfast.", transit: "Inside Ryokan" },
+                    { time: "11:00 - 14:00", spot: "Bear Park / Village Stroll", action: "Ropeway to Bear Park or shop for local souvenirs.", transit: "Walk" },
+                    { time: "14:30 - 17:30", spot: "Afternoon Onsen Bath", action: "Relax in multiple hot spring pools at Ryokan.", transit: "Inside Ryokan" },
+                    { time: "18:00 +", spot: "Dinner & Night Show", action: "Ryokan dinner and watch Enma-do mechanical puppet show.", transit: "Walk" }
+                ]
+            },
+            {
+                tabLabel: "11/16 Back Area",
+                date: "Nov 16 (Mon)",
+                title: "Return to Airport / Sapporo Area",
+                highlight: "Stay near airport area (Sapporo/Chitose) to eliminate flight risk.",
+                transit: "🚆 Transit: Donan Bus + JR Limited Express",
+                items: [
+                    { time: "10:30 - 12:00", spot: "Check-out -> Train to Sapporo/Chitose", action: "Bus to station and train back to Sapporo or Chitose hotel.", transit: "1 hr 10 mins train" },
+                    { time: "12:30 - 15:00", spot: "Lunch & Final Shopping", action: "Final souvenir shopping around station.", transit: "Walk" },
+                    { time: "16:00 - 18:00", spot: "Pack Luggage", action: "Check-in hotel and organize souvenirs into suitcases.", transit: "Hotel" },
+                    { time: "18:30 - 20:30", spot: "Farewell Dinner", action: "Enjoy last Hokkaido feast (Ghengis Khan BBQ or Soup Curry).", transit: "Free choice" }
+                ]
+            },
+            {
+                tabLabel: "11/17 Departure",
+                date: "Nov 17 (Tue)",
+                title: "CTS ✈️ PVG ✈️ KUL Return Flight",
+                highlight: "Airport shopping, smooth flight departure back to KUL.",
+                transit: "🚆 Transit: JR Rapid Airport to CTS\n✈️ Flights: 13:30 CTS -> 17:10 PVG | 00:10 PVG -> 05:40 KUL",
+                items: [
+                    { time: "09:00 - 09:40", spot: "Head to CTS Airport", action: "Take JR Rapid Airport directly to CTS station.", transit: "37-40 mins JR" },
+                    { time: "10:00 - 11:30", spot: "Airport Shopping & Check-in", action: "Drop luggage, visit Doraemon Sky Park & Royce Chocolate World.", transit: "Terminal walk" },
+                    { time: "11:30 - 12:30", spot: "Airport Lunch & Security", action: "Ramen at Ramen Dojo and clear customs.", transit: "International Terminal" },
+                    { time: "13:30 - 17:10", spot: "CTS ✈️ Shanghai (PVG)", action: "Flight to Shanghai PVG airport.", transit: "4 hrs 40 mins flight" },
+                    { time: "17:10 - 23:30", spot: "Shanghai PVG Transit", action: "Clear transit, dinner at PVG airport.", transit: "Transit in PVG" },
+                    { time: "00:10 - 05:40", spot: "PVG ✈️ KUL Arrival", action: "Board 00:10 flight, arrive safely at KUL at 05:40 AM (Nov 18).", transit: "5 hrs 30 mins flight" }
+                ]
+            }
+        ]
+    }
+};
+
+function getStoredData() {
+    const local = localStorage.getItem('hokkaido_plan_2026_detail');
+    return local ? JSON.parse(local) : JSON.parse(JSON.stringify(defaultData));
+}
+
+let planData = getStoredData();
+
+function renderTabs() {
+    const data = planData[currentLang];
+    const tabsBar = document.getElementById('tabs-bar');
+    
+    let html = `<button class="tab-btn ${currentTab === 'all' ? 'active' : ''}" onclick="switchTab('all')">${data.overviewTab}</button>`;
+    data.days.forEach((day, idx) => {
+        html += `<button class="tab-btn ${currentTab === idx ? 'active' : ''}" onclick="switchTab(${idx})">${day.tabLabel}</button>`;
+    });
+    tabsBar.innerHTML = html;
+}
+
+function renderContent() {
+    const container = document.getElementById('itinerary-container');
+    const data = planData[currentLang];
+
+    document.getElementById('app-title').innerText = data.title;
+    document.getElementById('lang-toggle-btn').innerText = currentLang === 'zh' ? 'English' : '中文';
+    document.getElementById('edit-toggle-btn').innerText = isEditing ? (currentLang === 'zh' ? '💾 保存' : '💾 Save') : (currentLang === 'zh' ? '✏️ 编辑行程' : '✏️ Edit');
+    document.getElementById('copy-btn').innerText = currentLang === 'zh' ? '📋 复制当前行程发 WhatsApp' : '📋 Copy Current Tab for WhatsApp';
+
+    if (isEditing) {
+        renderEditMode(container, data);
+        return;
+    }
+
+    if (currentTab === 'all') {
+        container.innerHTML = data.days.map((day, idx) => `
+            <div class="day-card" onclick="switchTab(${idx})" style="cursor:pointer;">
+                <div class="day-header">
+                    <span class="day-date">${day.date}</span>
+                    <div class="day-title">${day.title}</div>
+                </div>
+                <div class="highlight-box">${day.highlight}</div>
+                <div class="transit-badge" style="white-space: pre-line;">${day.transit}</div>
+                <div style="text-align:right; font-size:0.8rem; color:var(--primary); font-weight:600;">👉 点击查看当天时间安排细节</div>
+            </div>
+        `).join('');
+    } else {
+        const day = data.days[currentTab];
+        container.innerHTML = `
+            <div class="day-card">
+                <div class="day-header">
+                    <span class="day-date">${day.date}</span>
+                    <div class="day-title">${day.title}</div>
+                </div>
+                <div class="highlight-box">💡 亮点：${day.highlight}</div>
+                <div class="transit-badge" style="white-space: pre-line;">${day.transit}</div>
+                
+                <div style="margin-top:15px;">
+                    ${day.items.map(item => `
+                        <div class="detail-item">
+                            <div class="time-tag">⏰ ${item.time}</div>
+                            <div class="spot-name">📍 ${item.spot}</div>
+                            <div class="sub-detail">📝 ${item.action}</div>
+                            <div class="transit-detail">🚗 交通: ${item.transit}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+}
+
+function renderEditMode(container, data) {
+    if (currentTab === 'all') {
+        container.innerHTML = `<div class="day-card" style="text-align:center;">请先在上方标签选择【具体某一天】，再进行编辑操作！</div>`;
+        return;
+    }
+    const day = data.days[currentTab];
+    container.innerHTML = `
+        <div class="day-card">
+            <h3>编辑：${day.date}</h3>
+            <label>日期标题：</label>
+            <input type="text" value="${day.date}" onchange="updateDayField(${currentTab}, 'date', this.value)">
+            <label>主题：</label>
+            <input type="text" value="${day.title}" onchange="updateDayField(${currentTab}, 'title', this.value)">
+            <label>亮点：</label>
+            <input type="text" value="${day.highlight}" onchange="updateDayField(${currentTab}, 'highlight', this.value)">
+            <label>大交通：</label>
+            <textarea rows="2" onchange="updateDayField(${currentTab}, 'transit', this.value)">${day.transit}</textarea>
+            
+            <h4 style="margin-top:15px;">行程节点细节：</h4>
+            ${day.items.map((item, itemIdx) => `
+                <div style="background:#f1f5f9; padding:8px; margin-bottom:8px; border-radius:8px;">
+                    <input type="text" value="${item.time}" placeholder="时间" onchange="updateItemField(${currentTab},${itemIdx}, 'time', this.value)">
+                    <input type="text" value="${item.spot}" placeholder="地点" onchange="updateItemField(${currentTab},${itemIdx}, 'spot', this.value)">
+                    <textarea rows="2" placeholder="行程安排" onchange="updateItemField(${currentTab}, ${itemIdx}, 'action', this.value)">${item.action}</textarea>
+                    <input type="text" value="${item.transit}" placeholder="交通" onchange="updateItemField(${currentTab},${itemIdx}, 'transit', this.value)">
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function switchTab(tabIdx) {
+    currentTab = tabIdx;
+    renderTabs();
+    renderContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateDayField(dayIdx, field, val) {
+    planData[currentLang].days[dayIdx][field] = val;
+}
+
+function updateItemField(dayIdx, itemIdx, field, val) {
+    planData[currentLang].days[dayIdx].items[itemIdx][field] = val;
+}
+
+function toggleEditMode() {
+    isEditing = !isEditing;
+    if (!isEditing) {
+        localStorage.setItem('hokkaido_plan_2026_detail', JSON.stringify(planData));
+        alert(currentLang === 'zh' ? '修改已保存！' : 'Saved!');
+    }
+    renderContent();
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    renderTabs();
+    renderContent();
+}
+
+function resetDefault() {
+    if (confirm(currentLang === 'zh' ? '确定重置恢复初始所有行程细节吗？' : 'Reset to default?')) {
+        planData = JSON.parse(JSON.stringify(defaultData));
+        localStorage.removeItem('hokkaido_plan_2026_detail');
+        renderTabs();
+        renderContent();
+    }
+}
+
+function copyForWhatsApp() {
+    const data = planData[currentLang];
+    let text = "";
+
+    if (currentTab === 'all') {
+        text += `✈️ *${data.title} - 总大纲*\n\n`;
+        data.days.forEach(d => {
+            text += `🗓️ *${d.date} - ${d.title}*\n`;
+            text += `💡 ${d.highlight}\n`;
+            text += `${d.transit}\n\n`;
+        });
+    } else {
+        const d = data.days[currentTab];
+        text += `🗓️ *${d.date} - ${d.title}*\n`;
+        text += `💡 亮点：${d.highlight}\n`;
+        text += `${d.transit}\n\n`;
+        d.items.forEach(item => {
+            text += `⏰ *${item.time}* 【${item.spot}】\n`;
+            text += `📝 ${item.action}\n`;
+            text += `🚗 交通: ${item.transit}\n\n`;
+        });
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert(currentLang === 'zh' ? '已复制！可以直接粘贴发送到 WhatsApp。' : 'Copied for WhatsApp!');
+    });
+}
+
+renderTabs();
+renderContent();
+</script>
+</body>
+</html>
