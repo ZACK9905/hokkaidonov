@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hokkaido Trip Itinerary 2026</title>
+    <title>Hokkaido Trip Planner 2026</title>
     <style>
         :root {
             --primary: #1e40af;
@@ -11,13 +11,13 @@
             --bg: #f8fafc;
             --card-bg: #ffffff;
             --text: #1e293b;
-            --text-muted: #64748b;
+            --border: #cbd5e1;
             --accent: #d97706;
-            --border: #e2e8f0;
+            --success: #16a34a;
         }
         * { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
@@ -27,39 +27,33 @@
             margin-right: auto;
         }
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background: var(--primary);
             color: white;
-            padding: 16px 20px;
+            padding: 16px;
             border-radius: 16px;
             margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
+            text-align: center;
         }
-        .header h1 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-        .lang-btn {
+        .header h1 { margin: 0 0 10px 0; font-size: 1.25rem; }
+        .controls { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            backdrop-filter: blur(4px);
         }
+        .btn-success { background: var(--success); border: none; }
+        .btn-accent { background: var(--accent); border: none; }
         .day-card {
             background: var(--card-bg);
             border-radius: 14px;
             padding: 16px;
             margin-bottom: 14px;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         .day-header {
             display: flex;
@@ -69,265 +63,129 @@
             padding-bottom: 8px;
             margin-bottom: 10px;
         }
-        .day-date {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1rem;
-        }
-        .day-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text);
-        }
+        .day-date { font-weight: 700; color: var(--primary); }
+        .day-title { font-weight: 600; font-size: 0.95rem; }
         .transit-badge {
             background: var(--primary-light);
             color: var(--primary);
             padding: 6px 10px;
             border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 500;
+            font-size: 0.85rem;
             margin-bottom: 10px;
-            display: block;
-            line-height: 1.4;
         }
-        ul.details-list {
-            padding-left: 18px;
-            margin: 0;
-            color: #334155;
+        ul.details-list { padding-left: 18px; margin: 0; font-size: 0.9rem; }
+        ul.details-list li { margin-bottom: 6px; }
+        input, textarea {
+            width: 100%;
+            padding: 6px;
+            margin: 4px 0;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             font-size: 0.9rem;
         }
-        ul.details-list li {
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-        .copy-btn-container {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-        .copy-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);
-        }
+        .action-container { text-align: center; margin: 20px 0 40px 0; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1 id="app-title">🇯🇵 北海道行程 2026</h1>
-    <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">English</button>
+    <div class="controls">
+        <button class="btn" onclick="toggleLanguage()" id="lang-toggle-btn">English</button>
+        <button class="btn btn-accent" onclick="toggleEditMode()" id="edit-toggle-btn">✏️ 编辑行程</button>
+        <button class="btn btn-success" onclick="resetDefault()" id="reset-btn">🔄 恢复默认</button>
+    </div>
 </div>
 
 <div id="itinerary-container"></div>
 
-<div class="copy-btn-container">
-    <button class="copy-btn" onclick="copyForWhatsApp()" id="copy-btn">📋 复制行程发 WhatsApp</button>
+<div class="action-container">
+    <button class="btn btn-accent" style="padding: 12px 24px; font-size: 1rem;" onclick="copyForWhatsApp()" id="copy-btn">📋 复制行程发 WhatsApp</button>
 </div>
 
 <script>
 let currentLang = 'zh';
+let isEditing = false;
 
-const itineraryData = {
-    zh: {
-        title: "🇯🇵 北海道行程 2026",
-        toggleBtn: "English",
-        copyBtn: "📋 复制行程发 WhatsApp",
-        days: [
-            {
-                date: "11月9日 (周一)",
-                title: "抵达与札幌入门",
-                transit: "🚆 交通：JR快速Airport（37-40分钟，刷IC卡或现场购票）",
-                details: [
-                    "13:00 抵达新千岁机场 (CTS)，入境后前往 JR 车站",
-                    "搭乘 JR 快速列车直达札幌站，入住札幌市区酒店",
-                    "晚上：狸小路商店街漫步，品尝正宗札幌味噌拉面"
-                ]
-            },
-            {
-                date: "11月10日 (周二)",
-                title: "札幌城市与美食探索",
-                transit: "🚇 交通：札幌地下铁南北线 + 步行（刷IC卡）",
-                details: [
-                    "08:30 二条市场享用豪华海鲜丼（帝王蟹、鲑鱼卵）",
-                    "10:45 北海道大学漫步，感受初冬校园风光",
-                    "15:30 大通公园 & 札幌电视塔 & 狸小路采买",
-                    "18:30 品尝北海道特色汤咖喱（Suage+ 或 GARAKU）"
-                ]
-            },
-            {
-                date: "11月11日 (周三)",
-                title: "小樽浪漫一日游",
-                transit: "🚇/🚆 交通：地下铁东西线 + JR函馆本线（刷IC卡）",
-                details: [
-                    "09:00 白色恋人公园参观童话城堡与巧克力工厂",
-                    "12:30 搭乘 JR 前往小樽，三角市场品尝鲜美海鲜",
-                    "14:00 堺町通商店街（北一硝子、八音盒堂、LeTAO蛋糕）",
-                    "17:00 小樽运河华灯初上浪漫夜景，随后返回札幌"
-                ]
-            },
-            {
-                date: "11月12日 (周四)",
-                title: "旭川动物园一日游 (或定山溪温泉)",
-                transit: "🚆/🚌 交通：JR特急列车（需提前划位）+ 旭川市营巴士",
-                details: [
-                    "08:00 搭乘 JR 特急 Lilac 前往旭川（1.5小时）",
-                    "09:40 换乘巴士前往旭山动物园（观赏北极熊、海豹）",
-                    "15:00 品尝正宗旭川酱油拉面，傍晚返回札幌"
-                ]
-            },
-            {
-                date: "11月13日 (周五)",
-                title: "札幌深度体验与准备",
-                transit: "🚇 交通：地下铁 + 步行",
-                details: [
-                    "10:00 北海道神宫参拜 / 大仓山跳台俯瞰城市",
-                    "15:00 JR 札幌站地下街购物，划好明日前往登别的特急车票",
-                    "18:00 成吉思汗烤羊肉（Daruma），晚上登上 JR Tower T38 看夜景"
-                ]
-            },
-            {
-                date: "11月14日-15日 (周六-日)",
-                title: "登别温泉度假",
-                transit: "🚆/🚌 交通：JR特急列车（札幌→登别，全车指定席）+ 道南巴士",
-                details: [
-                    "14日：搭乘 JR 特急前往登别，入住日式温泉酒店，游览地狱谷",
-                    "15日：全天享受温泉、体验日式会席料理，身心彻底放松"
-                ]
-            },
-            {
-                date: "11月16日 (周一)",
-                title: "返回机场周边备战回程",
-                transit: "🚆 交通：JR特急/普通列车",
-                details: [
-                    "登别温泉退房，搭乘 JR 返回札幌站或千岁站附近入住",
-                    "进行最后的伴手礼采买，享用美食，确保次日赶飞机零风险"
-                ]
-            },
-            {
-                date: "11月17日 (周二)",
-                title: "顺利返程",
-                transit: "🚆 交通：JR快速Airport 直达新千岁机场",
-                details: [
-                    "09:30 前往新千岁机场，在机场国内线商场最后购物与用餐",
-                    "搭乘 13:30 航班顺利返程 ✈️"
-                ]
-            }
-        ]
-    },
-    en: {
-        title: "🇯🇵 Hokkaido Itinerary 2026",
-        toggleBtn: "中文",
-        copyBtn: "📋 Copy Text for WhatsApp",
-        days: [
-            {
-                date: "Nov 9 (Mon)",
-                title: "Arrival & Sapporo Intro",
-                transit: "🚆 Transit: JR Rapid Airport (37-40 mins, IC Card or Ticket)",
-                details: [
-                    "13:00 Arrive at New Chitose Airport (CTS), head to JR Station",
-                    "Take JR train directly to Sapporo Station & check in",
-                    "Evening: Tanukikoji Shopping Street & Miso Ramen"
-                ]
-            },
-            {
-                date: "Nov 10 (Tue)",
-                title: "Sapporo City & Food Tour",
-                transit: "🚇 Transit: Sapporo Subway Namboku Line + Walk (IC Card)",
-                details: [
-                    "08:30 Seafood bowl at Nijo Market (King Crab, Salmon Roe)",
-                    "10:45 Stroll through Hokkaido University campus",
-                    "15:30 Odori Park, TV Tower & Shopping",
-                    "18:30 Hokkaido Soup Curry (Suage+ or GARAKU)"
-                ]
-            },
-            {
-                date: "Nov 11 (Wed)",
-                title: "Romantic Otaru Day Trip",
-                transit: "🚇/🚆 Transit: Subway Tozai Line + JR Hakodate Line (IC Card)",
-                details: [
-                    "09:00 Shiroi Koibito Park (Chocolate Factory)",
-                    "12:30 Train to Otaru, seafood lunch at Sankaku Market",
-                    "14:00 Sakaimachi Street (Glassworks, Music Box Museum, LeTAO)",
-                    "17:00 Otaru Canal night view, return to Sapporo"
-                ]
-            },
-            {
-                date: "Nov 12 (Thu)",
-                title: "Asahiyama Zoo Day Trip",
-                transit: "🚆/🚌 Transit: JR Limited Express (Reserved Seat) + Local Bus",
-                details: [
-                    "08:00 JR Limited Express Lilac to Asahikawa (1.5 hrs)",
-                    "09:40 Bus to Asahiyama Zoo (Polar Bears, Seals)",
-                    "15:00 Taste Asahikawa Soy Sauce Ramen, head back"
-                ]
-            },
-            {
-                date: "Nov 13 (Fri)",
-                title: "Sapporo Exploration & Prep",
-                transit: "🚇 Transit: Subway + Walk",
-                details: [
-                    "10:00 Hokkaido Shrine / Okurayama Ski Jump viewpoint",
-                    "15:00 Shopping at Sapporo Station, reserve tomorrow's ticket",
-                    "18:00 Genghis Khan Grilled Mutton, night view at JR Tower T38"
-                ]
-            },
-            {
-                date: "Nov 14-15 (Sat-Sun)",
-                title: "Noboribetsu Onsen Getaway",
-                transit: "🚆/🚌 Transit: JR Limited Express (All Reserved) + Donan Bus",
-                details: [
-                    "Nov 14: JR Limited Express to Noboribetsu, Ryokan check-in, visit Jigokudani",
-                    "Nov 15: Full day relaxing in hot springs & Kaiseki dinner"
-                ]
-            },
-            {
-                date: "Nov 16 (Mon)",
-                title: "Return to Airport / Sapporo Area",
-                transit: "🚆 Transit: JR Limited Express / Local Train",
-                details: [
-                    "Check out, take JR back to hotel near Sapporo or Chitose",
-                    "Final souvenir shopping, ensure 0 risk for tomorrow's flight"
-                ]
-            },
-            {
-                date: "Nov 17 (Tue)",
-                title: "Departure",
-                transit: "🚆 Transit: JR Rapid Airport directly to CTS Airport",
-                details: [
-                    "09:30 Head to airport, last-minute shopping at CTS Terminal",
-                    "Board 13:30 flight back home ✈️"
-                ]
-            }
-        ]
-    }
+const defaultData = {
+    zh: [
+        { date: "11月9日 (周一)", title: "抵达札幌", transit: "🚆 交通：JR快速Airport", details: ["13:00 抵达新千岁机场 (CTS)", "搭乘 JR 直达札幌入住酒店", "晚餐：自由选择（如札幌拉面）"] },
+        { date: "11月10日 (周二)", title: "札幌市区漫游", transit: "🚇 交通：地下铁 + 步行", details: ["早/午餐：自由安排（二条市场或市区美食）", "下午：北海道大学 / 大通公园漫步", "晚餐：汤咖喱或烤肉（按喜好选择）"] },
+        { date: "11月11日 (周三)", title: "小樽浪漫一日游", transit: "🚆 交通：JR 函馆本线", details: ["上午：白色恋人公园（可选）", "中午：小樽三角市场或市区用餐", "下午：堺町通商店街、小樽运河夜景"] },
+        { date: "11月12日 (周四)", title: "旭川一日游 / 近郊游", transit: "🚆 交通：JR 特急（需划位）", details: ["去旭山动物园看动物，或改在札幌近郊温泉/神宫休闲"] },
+        { date: "11月13日 (周五)", title: "札幌深度逛街与准备", transit: "🚇 交通：地下铁", details: ["市区采买、札幌站 Shopping", "提前划好明天去登别的特急车票"] },
+        { date: "11月14-15日 (周六-日)", title: "登别温泉度假", transit: "🚆 交通：JR 特急全车指定席", details: ["入住日式温泉酒店，游览地狱谷，全天放松泡汤"] },
+        { date: "11月16日 (周一)", title: "返回机场周边", transit: "🚆 交通：JR 列车", details: ["退房返回札幌或千岁站入住，购买伴手礼，准备回程"] },
+        { date: "11月17日 (周二)", title: "顺利返程", transit: "🚆 交通：JR 快速 Airport", details: ["09:30 前往机场，逛国内线商场，13:30 航班起飞"] }
+    ],
+    en: [
+        { date: "Nov 9 (Mon)", title: "Arrival & Sapporo", transit: "🚆 Transit: JR Rapid Airport", details: ["13:00 Arrive at CTS Airport", "Take JR to Sapporo & Check-in", "Dinner: Local Miso Ramen / Free choice"] },
+        { date: "Nov 10 (Tue)", title: "Sapporo City Tour", transit: "🚇 Transit: Subway + Walk", details: ["Breakfast/Lunch: Local markets or cafes", "Afternoon: Hokkaido University & Odori Park", "Dinner: Soup Curry or Genghis Khan BBQ"] },
+        { date: "Nov 11 (Wed)", title: "Otaru Day Trip", transit: "🚆 Transit: JR Hakodate Line", details: ["Morning: Shiroi Koibito Park (Optional)", "Noon: Lunch in Otaru", "Afternoon: Sakaimachi Street & Otaru Canal"] },
+        { date: "Nov 12 (Thu)", title: "Asahikawa / Free Day", transit: "🚆 Transit: JR Limited Express", details: ["Visit Asahiyama Zoo or relax near Sapporo"] },
+        { date: "Nov 13 (Fri)", title: "Shopping & Prep", transit: "🚇 Transit: Subway", details: ["Shopping around Sapporo Station", "Reserve tomorrow's train ticket to Noboribetsu"] },
+        { date: "Nov 14-15 (Sat-Sun)", title: "Noboribetsu Onsen", transit: "🚆 Transit: JR Limited Express", details: ["Onsen Ryokan stay, visit Jigokudani, hot spring relaxation"] },
+        { date: "Nov 16 (Mon)", title: "Return to Airport Area", transit: "🚆 Transit: JR Train", details: ["Return to Sapporo/Chitose hotel, final souvenir shopping"] },
+        { date: "Nov 17 (Tue)", title: "Departure", transit: "🚆 Transit: JR Rapid Airport", details: ["09:30 Head to CTS Airport, 13:30 Flight departure"] }
+    ]
 };
 
-function render() {
-    const data = itineraryData[currentLang];
-    document.getElementById('app-title').innerText = data.title;
-    document.getElementById('lang-toggle-btn').innerText = data.toggleBtn;
-    document.getElementById('copy-btn').innerText = data.copyBtn;
+function getStoredData() {
+    const local = localStorage.getItem('hokkaido_plan_2026');
+    return local ? JSON.parse(local) : JSON.parse(JSON.stringify(defaultData));
+}
 
+let planData = getStoredData();
+
+function render() {
     const container = document.getElementById('itinerary-container');
-    container.innerHTML = data.days.map(day => `
-        <div class="day-card">
-            <div class="day-header">
-                <span class="day-date">${day.date}</span>
-                <span class="day-title">${day.title}</span>
+    const data = planData[currentLang];
+    
+    document.getElementById('app-title').innerText = currentLang === 'zh' ? '🇯🇵 北海道行程 2026' : '🇯🇵 Hokkaido Itinerary 2026';
+    document.getElementById('lang-toggle-btn').innerText = currentLang === 'zh' ? 'English' : '中文';
+    document.getElementById('edit-toggle-btn').innerText = isEditing ? (currentLang === 'zh' ? '💾 保存更改' : '💾 Save Changes') : (currentLang === 'zh' ? '✏️ 编辑行程' : '✏️ Edit Plan');
+    document.getElementById('copy-btn').innerText = currentLang === 'zh' ? '📋 复制行程发 WhatsApp' : '📋 Copy Text for WhatsApp';
+
+    if (!isEditing) {
+        container.innerHTML = data.map(item => `
+            <div class="day-card">
+                <div class="day-header">
+                    <span class="day-date">${item.date}</span>
+                    <span class="day-title">${item.title}</span>
+                </div>
+                <div class="transit-badge">${item.transit}</div>
+                <ul class="details-list">
+                    ${item.details.map(d => `<li>${d}</li>`).join('')}
+                </ul>
             </div>
-            <div class="transit-badge">${day.transit}</div>
-            <ul class="details-list">
-                ${day.details.map(d => `<li>${d}</li>`).join('')}
-            </ul>
-        </div>
-    `).join('');
+        `).join('');
+    } else {
+        container.innerHTML = data.map((item, idx) => `
+            <div class="day-card">
+                <input type="text" value="${item.date}" onchange="updateField(${idx}, 'date', this.value)">
+                <input type="text" value="${item.title}" onchange="updateField(${idx}, 'title', this.value)">
+                <input type="text" value="${item.transit}" onchange="updateField(${idx}, 'transit', this.value)">
+                <textarea rows="3" onchange="updateDetails(${idx}, this.value)">${item.details.join('\n')}</textarea>
+            </div>
+        `).join('');
+    }
+}
+
+function updateField(idx, field, value) {
+    planData[currentLang][idx][field] = value;
+}
+
+function updateDetails(idx, text) {
+    planData[currentLang][idx].details = text.split('\n').filter(line => line.trim() !== '');
+}
+
+function toggleEditMode() {
+    isEditing = !isEditing;
+    if (!isEditing) {
+        localStorage.setItem('hokkaido_plan_2026', JSON.stringify(planData));
+        alert(currentLang === 'zh' ? '行程已保存到手机！' : 'Plan saved!');
+    }
+    render();
 }
 
 function toggleLanguage() {
@@ -335,20 +193,26 @@ function toggleLanguage() {
     render();
 }
 
+function resetDefault() {
+    if (confirm(currentLang === 'zh' ? '确定恢复到初始默认行程吗？' : 'Reset to default plan?')) {
+        planData = JSON.parse(JSON.stringify(defaultData));
+        localStorage.removeItem('hokkaido_plan_2026');
+        render();
+    }
+}
+
 function copyForWhatsApp() {
-    const data = itineraryData[currentLang];
-    let text = `${data.title}\n\n`;
-    data.days.forEach(d => {
+    const data = planData[currentLang];
+    let text = `${currentLang === 'zh' ? '🇯🇵 北海道行程 2026' : '🇯🇵 Hokkaido Itinerary'}\n\n`;
+    data.forEach(d => {
         text += `🗓️ *${d.date} - ${d.title}*\n`;
         text += `${d.transit}\n`;
-        d.details.forEach(item => {
-            text += `• ${item}\n`;
-        });
+        d.details.forEach(item => { text += `• ${item}\n`; });
         text += `\n`;
     });
 
     navigator.clipboard.writeText(text).then(() => {
-        alert(currentLang === 'zh' ? '行程已复制！可直接粘贴到 WhatsApp 群组。' : 'Itinerary copied! Ready to paste into WhatsApp.');
+        alert(currentLang === 'zh' ? '已复制最新行程！可直接粘贴到 WhatsApp。' : 'Copied to clipboard for WhatsApp!');
     });
 }
 
